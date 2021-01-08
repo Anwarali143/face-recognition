@@ -1,0 +1,36 @@
+import cv2
+import numoy as np
+from PIL impor Image
+import os
+
+  path= 'dataset'
+
+  recognizer=cv2.face.LBPH Face Recognizer_create()
+  detector=cv2.Cascade(haarcascade_frontalface_default)
+
+  def getImage And Labels(path)
+
+  imagepaths=[os.path.join(path,f)for in os.listdir(path)] 
+  Facesamples=[]
+  ids=[]
+
+  For image path in imagepaths.
+  PIL_img=Image/open(imagepath).convert('L')
+  img_numoy=np/array(IPL-img,'uint 8')
+
+  id=int(os.path.split(imagepath)[-1].split(".")[1])
+  faces=detector.detectMultiScale(img_numpy)
+
+  for(wx,y,w,h) in faces:
+  facesamples.append(img_numpy[y:y+h,x:x+w])
+  ids.append(id)
+
+return facesamples.ids
+
+print("\n"[INFO] Traning faces.....)
+faces,ids=getImages And Lables(pat)
+recognizer.train(faces, np.array(ids))
+
+recognizer.writer('trainer/trainer.yml)
+
+print("\n[INFO}{0} faces trained".format9len(np.unique(ids)))
